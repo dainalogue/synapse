@@ -10,11 +10,14 @@ import { configFile } from './config-store.ts'
 import { attachBus } from './bus.ts'
 import { dropUnclaimedUpgrades } from './upgrade.ts'
 import { runAgent } from './generate.ts'
+import { requireSupportedHostMode } from './host-mode.ts'
 import { createModelStore, modelCacheFile } from './model-store.ts'
 import { createNoteSession } from './note-agent.ts'
 import { createRunStarter } from './runs.ts'
 import { defaultPlan, sessionsRoot, spawnPty } from './terminal.ts'
 import { createSessions } from './terminal-sessions.ts'
+
+requireSupportedHostMode(process.env)
 
 const { web: WEB_PORT, server: SERVER_PORT } = ports(process.env)
 const environment = { env: process.env, home: homedir() }
